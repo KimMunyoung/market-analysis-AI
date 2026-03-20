@@ -155,7 +155,6 @@
   }
   .logo span { color:var(--text2); font-size:11px; display:block; margin-top:4px; font-family:'Noto Sans KR',sans-serif; letter-spacing:0; font-weight:300; }
 
-  /* 유형 전환 토글 */
   .type-toggle {
     margin:14px 12px 4px;
     background:var(--bg);
@@ -187,7 +186,6 @@
   .nav-item.active-owner { color:var(--accent2); border-left-color:var(--accent2); background:rgba(0,132,255,0.05); }
   .nav-icon { width:16px; font-size:14px; }
 
-  /* 유형 배지 알림 */
   .nav-badge {
     margin-left:auto; font-size:9px; font-weight:700;
     padding:2px 6px; border-radius:20px;
@@ -211,7 +209,6 @@
   .user-name { font-size:13px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .user-role { font-size:11px; transition:color 0.3s; }
 
-  /* 유형 표시 pill */
   .type-pill {
     display:inline-flex; align-items:center; gap:6px;
     padding:4px 12px; border-radius:20px;
@@ -236,7 +233,6 @@
   .page-subtitle { font-size:13px; color:var(--text2); margin-top:4px; }
   .topbar-actions { display:flex; gap:10px; }
 
-  /* ─── BUTTONS ─── */
   .btn { padding:10px 20px; border-radius:8px; font-size:13px; font-weight:500; cursor:pointer; border:none; transition:all 0.2s; font-family:'Noto Sans KR',sans-serif; }
   .btn-primary-founder { background:var(--accent); color:#000; }
   .btn-primary-founder:hover { background:#00ffb3; box-shadow:0 0 20px rgba(0,229,160,0.4); }
@@ -248,7 +244,6 @@
   .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
   .btn-sm { padding:7px 14px; font-size:12px; }
 
-  /* ─── CARDS ─── */
   .card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:24px; }
   .card-grid { display:grid; gap:20px; }
   .grid-2 { grid-template-columns:1fr 1fr; }
@@ -366,16 +361,33 @@
   .insight-title { font-size:13px; font-weight:500; margin-bottom:4px; }
   .insight-desc { font-size:12px; color:var(--text2); line-height:1.6; }
 
+  /* 유사상권 지역 필터 */
+  .region-filter { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+  .region-btn {
+    padding:5px 14px; border-radius:20px; font-size:12px;
+    cursor:pointer; border:1px solid var(--border);
+    background:transparent; color:var(--text2);
+    font-family:'Noto Sans KR',sans-serif; transition:all 0.2s;
+  }
+  .region-btn.active { background:rgba(0,229,160,0.1); border-color:rgba(0,229,160,0.3); color:var(--accent); }
+  .region-btn:hover:not(.active) { border-color:rgba(255,255,255,0.2); color:var(--text); }
+
+  /* 추정 배지 */
+  .est-badge {
+    display:inline-block; font-size:9px; font-weight:700;
+    padding:1px 6px; border-radius:4px;
+    background:rgba(255,107,53,0.12); color:var(--accent3);
+    vertical-align:middle; margin-left:4px;
+  }
+
   ::-webkit-scrollbar { width:4px; }
   ::-webkit-scrollbar-track { background:transparent; }
   ::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
 
-  /* ─── ACCENT OVERRIDE for owner mode ─── */
   body.owner-mode .chat-input:focus { border-color:var(--accent2); }
   body.owner-mode .upload-area:hover { border-color:var(--accent2); background:rgba(0,132,255,0.03); }
   body.owner-mode input:focus, body.owner-mode select:focus { border-color:var(--accent2); }
 
-  /* ─── TOAST ─── */
   .toast {
     position:fixed; bottom:28px; right:28px;
     background:var(--bg2); border:1px solid rgba(255,255,255,0.12);
@@ -393,9 +405,7 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     ONBOARDING OVERLAY
-════════════════════════════════════════ -->
+<!-- ═══ ONBOARDING OVERLAY ═══ -->
 <div class="onboard-overlay" id="onboardOverlay">
   <div class="onboard-box">
     <div class="ob-logo">상권AI</div>
@@ -403,9 +413,7 @@
       공공데이터와 AI를 결합한 맞춤형 상권 분석 플랫폼입니다.<br>
       어떤 목적으로 사용하실 계획인가요?
     </div>
-
     <div class="ob-cards">
-      <!-- 예비 창업자 -->
       <div class="ob-card founder-card" id="obFounder" onclick="selectOnboardType('founder')">
         <div class="ob-check">✓</div>
         <div class="ob-card-banner" style="background:#071510">
@@ -416,13 +424,11 @@
         <div class="ob-card-title">첫 매장을 열 예정이에요</div>
         <div class="ob-card-desc">입지 선정과 상권 분석이 필요한 예비 창업자를 위한 맞춤형 서비스를 제공합니다.</div>
         <div class="ob-features">
-          <div class="ob-feat"><div class="ob-feat-dot" style="background:var(--accent)"></div>최적 입지 추천 및 점수 비교</div>
-          <div class="ob-feat"><div class="ob-feat-dot" style="background:var(--accent)"></div>경쟁 밀집도 · 유동인구 분석</div>
+          <div class="ob-feat"><div class="ob-feat-dot" style="background:var(--accent)"></div>추정 유동인구 · 경쟁 점포수 분석</div>
+          <div class="ob-feat"><div class="ob-feat-dot" style="background:var(--accent)"></div>경쟁 밀집도 · 업종 분포 탐색</div>
           <div class="ob-feat"><div class="ob-feat-dot" style="background:var(--accent)"></div>AI 챗봇 입지 상담</div>
         </div>
       </div>
-
-      <!-- 기존 소상공인 -->
       <div class="ob-card owner-card" id="obOwner" onclick="selectOnboardType('owner')">
         <div class="ob-check">✓</div>
         <div class="ob-card-banner" style="background:#070B14">
@@ -439,7 +445,6 @@
         </div>
       </div>
     </div>
-
     <div class="ob-footer">
       <div class="ob-skip" onclick="startWithType('founder')">건너뛰기</div>
       <button class="ob-confirm" id="obConfirm" onclick="confirmOnboardType()">시작하기</button>
@@ -447,9 +452,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     LOGIN PAGE
-════════════════════════════════════════ -->
+<!-- ═══ LOGIN PAGE ═══ -->
 <div class="login-page" id="loginPage">
   <div class="login-bg"></div>
   <div class="login-card">
@@ -460,56 +463,33 @@
       <div class="login-tab" id="tabRegister" onclick="switchLoginTab('register')">회원가입</div>
     </div>
     <div id="loginForm">
-      <div class="form-group">
-        <label>이메일</label>
-        <input type="email" placeholder="your@email.com">
-      </div>
-      <div class="form-group">
-        <label>비밀번호</label>
-        <input type="password" placeholder="••••••••">
-      </div>
+      <div class="form-group"><label>이메일</label><input type="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>비밀번호</label><input type="password" placeholder="••••••••"></div>
       <button class="btn btn-primary" style="width:100%;margin-top:4px" onclick="enterApp()">로그인</button>
       <div class="divider">또는</div>
       <button class="btn btn-outline" style="width:100%">🔗 소셜 계정으로 로그인</button>
     </div>
     <div id="registerForm" style="display:none">
-      <div class="form-group">
-        <label>이름</label><input type="text" placeholder="홍길동">
-      </div>
-      <div class="form-group">
-        <label>이메일</label><input type="email" placeholder="your@email.com">
-      </div>
-      <div class="form-group">
-        <label>비밀번호</label><input type="password" placeholder="8자 이상">
-      </div>
-      <div class="form-group">
-        <label>역할</label>
-        <select>
-          <option>예비 창업자</option>
-          <option>기존 매장 사장님</option>
-          <option>연구자 / 기타</option>
-        </select>
+      <div class="form-group"><label>이름</label><input type="text" placeholder="홍길동"></div>
+      <div class="form-group"><label>이메일</label><input type="email" placeholder="your@email.com"></div>
+      <div class="form-group"><label>비밀번호</label><input type="password" placeholder="8자 이상"></div>
+      <div class="form-group"><label>역할</label>
+        <select><option>예비 창업자</option><option>기존 매장 사장님</option><option>연구자 / 기타</option></select>
       </div>
       <button class="btn btn-primary" style="width:100%;margin-top:4px" onclick="enterApp()">회원가입</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     APP SHELL
-════════════════════════════════════════ -->
+<!-- ═══ APP SHELL ═══ -->
 <div id="appShell" style="display:none">
 
-<!-- SIDEBAR -->
 <div class="sidebar">
   <div class="logo">상권AI <span>Local Market Intelligence</span></div>
-
-  <!-- 유형 전환 토글 -->
   <div class="type-toggle">
     <button class="tt-btn" id="ttFounder" onclick="switchUserType('founder')">📍 창업자</button>
     <button class="tt-btn" id="ttOwner" onclick="switchUserType('owner')">📊 소상공인</button>
   </div>
-
   <nav class="nav">
     <div class="nav-group">
       <div class="nav-label">메인</div>
@@ -536,7 +516,6 @@
       <div class="nav-item" id="nav-mypage" onclick="goto('mypage')"><span class="nav-icon">👤</span>마이페이지</div>
     </div>
   </nav>
-
   <div class="user-area" onclick="goto('mypage')">
     <div class="avatar founder-av" id="sidebarAvatar">김</div>
     <div class="user-info">
@@ -564,15 +543,10 @@
       <button class="btn btn-sm btn-primary-founder" id="homePrimaryBtn" onclick="goto('fusion')">새 분석 시작</button>
     </div>
   </div>
-
-  <!-- STAT CARDS: 동적 렌더 -->
   <div class="card-grid grid-4" style="margin-bottom:24px" id="homeStatsGrid"></div>
-
   <div class="card-grid grid-2" style="margin-bottom:24px">
-    <!-- 서비스 소개: 유형별 -->
     <div class="card" id="homeIntroCard">
       <div class="section-header"><div class="section-title">🚀 서비스 소개</div></div>
-      <!-- 동적 콘텐츠 -->
     </div>
     <div class="card">
       <div class="section-header">
@@ -582,7 +556,6 @@
       <div class="timeline" id="homeHistoryList"></div>
     </div>
   </div>
-
   <div class="card">
     <div class="section-header"><div class="section-title">⚡ 빠른 시작</div></div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px" id="homeQuickGrid"></div>
@@ -691,7 +664,7 @@
   </div>
   <div class="card-grid grid-3">
     <div class="card">
-      <div class="stat-label">유동인구 (일평균)</div>
+      <div class="stat-label">추정 유동인구 (일평균)</div>
       <div class="stat-value" style="font-size:22px">24,580명</div>
       <div style="margin-top:12px">
         <div style="font-size:11px;color:var(--text2);margin-bottom:4px">시간대별 분포</div>
@@ -717,9 +690,9 @@
     <div class="card">
       <div class="stat-label">상권 핵심 지표</div>
       <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
-        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">월 평균 매출</span><span style="font-family:monospace;color:var(--accent)">₩4,200만</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">추정 월 매출<span class="est-badge">추정</span></span><span style="font-family:monospace;color:var(--accent)">₩4,200만</span></div>
         <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">폐업률 (최근 1년)</span><span style="font-family:monospace;color:#ff5050">8.2%</span></div>
-        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">창업 성공률</span><span style="font-family:monospace;color:var(--accent)">72%</span></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">경쟁 점포수</span><span style="font-family:monospace;color:var(--accent)">34개</span></div>
         <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">임대료 수준</span><span class="badge badge-orange">중상</span></div>
         <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px">상권 성장률</span><span style="font-family:monospace;color:var(--accent)">+12.4%</span></div>
       </div>
@@ -750,11 +723,13 @@
           <input type="date" value="2024-01-01"><input type="date" value="2024-12-31">
         </div>
       </div>
+      <!-- ✅ 수정: 분석 항목에서 "생존율" 제거 -->
       <div class="form-group"><label>분석 항목</label>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
           <label style="display:flex;gap:8px;align-items:center;cursor:pointer;font-size:13px;color:var(--text)"><input type="checkbox" checked style="width:auto"> 유동인구</label>
           <label style="display:flex;gap:8px;align-items:center;cursor:pointer;font-size:13px;color:var(--text)"><input type="checkbox" checked style="width:auto"> 경쟁업체</label>
           <label style="display:flex;gap:8px;align-items:center;cursor:pointer;font-size:13px;color:var(--text)"><input type="checkbox" checked style="width:auto"> 매출 추이</label>
+          <label style="display:flex;gap:8px;align-items:center;cursor:pointer;font-size:13px;color:var(--text)"><input type="checkbox" checked style="width:auto"> 폐업률</label>
         </div>
       </div>
     </div>
@@ -808,7 +783,10 @@
       <button class="btn btn-primary btn-sm" onclick="goto('strategy')">AI 전략 보기</button>
     </div>
   </div>
+
+  <!-- ✅ 수정: 창업자 모드 stat cards — 종합 입지 점수·예상 월매출 제거, 추정 유동인구·경쟁 점포수로 교체 -->
   <div class="card-grid grid-3" style="margin-bottom:20px" id="dashStatsGrid"></div>
+
   <div class="card-grid grid-2" style="margin-bottom:20px">
     <div class="card">
       <div class="section-header"><div class="section-title">📈 월별 매출 추이 (비교)</div></div>
@@ -832,20 +810,74 @@
       <div style="display:flex;flex-direction:column;gap:14px;margin-top:8px" id="dashEvalItems"></div>
     </div>
   </div>
+
+  <!-- ✅ 수정: 유사 상권 비교 — 서울 한정, 지역 필터 추가, 추정 매출 표기 -->
   <div class="card">
-    <div class="section-header"><div class="section-title">🏆 유사 상권 비교 <span style="font-size:11px;color:var(--text2);font-weight:400">(서울 주요 상권 · 추정치 기준)</span></div></div>
-    <div class="table-wrap">
-      <table>
-        <tr><th>지역</th><th>추정 유동인구</th><th>추정 매출</th><th>경쟁 점포수</th><th>경쟁강도</th><th>비고</th></tr>
-        <tr><td style="font-weight:600;color:var(--accent)">성수동 ★</td><td>24,580명/일</td><td style="color:var(--text2);font-size:12px">추정 3,800~4,600만원</td><td>34개</td><td><span class="badge badge-blue">보통</span></td><td><span class="badge badge-green">현재 선택</span></td></tr>
-        <tr><td>망원동</td><td>18,230명/일</td><td style="color:var(--text2);font-size:12px">추정 2,800~3,400만원</td><td>21개</td><td><span class="badge badge-green">낮음</span></td><td><span class="badge badge-gray">서울 마포구</span></td></tr>
-        <tr><td>연남동</td><td>21,400명/일</td><td style="color:var(--text2);font-size:12px">추정 3,100~3,900만원</td><td>41개</td><td><span class="badge badge-orange">높음</span></td><td><span class="badge badge-gray">서울 마포구</span></td></tr>
-        <tr><td>합정동</td><td>16,900명/일</td><td style="color:var(--text2);font-size:12px">추정 2,500~3,100만원</td><td>28개</td><td><span class="badge badge-orange">높음</span></td><td><span class="badge badge-gray">서울 마포구</span></td></tr>
-        <tr><td>한남동</td><td>19,800명/일</td><td style="color:var(--text2);font-size:12px">추정 3,200~4,000만원</td><td>32개</td><td><span class="badge badge-blue">보통</span></td><td><span class="badge badge-gray">서울 용산구</span></td></tr>
-      </table>
+    <div class="section-header">
+      <div>
+        <div class="section-title">🏆 유사 상권 비교 <span style="font-size:11px;font-weight:400;color:var(--text2);margin-left:6px">서울 한정 · 동일 업종</span></div>
+        <div style="font-size:11px;color:var(--text2);margin-top:4px">⚠️ 매출은 공공데이터 기반 추정값이며 실제와 다를 수 있습니다</div>
+      </div>
+      <div class="region-filter" id="regionFilter">
+        <button class="region-btn active" onclick="filterRegion(this,'전체')">전체</button>
+        <button class="region-btn" onclick="filterRegion(this,'성동구')">성동구</button>
+        <button class="region-btn" onclick="filterRegion(this,'마포구')">마포구</button>
+        <button class="region-btn" onclick="filterRegion(this,'강남구')">강남구</button>
+        <button class="region-btn" onclick="filterRegion(this,'용산구')">용산구</button>
+      </div>
     </div>
-    <div style="margin-top:12px;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:11px;color:var(--text2)">
-      ⚠️ 추정 매출은 공공 상권 데이터 기반 범위 추정치이며, 실제 매출과 다를 수 있습니다.
+    <div class="table-wrap">
+      <table id="similarTable">
+        <tr><th>지역</th><th>추정 유동인구</th><th>경쟁 점포수</th><th>추정 월매출<span class="est-badge">추정</span></th><th>폐업률</th><th>비고</th></tr>
+        <tr data-gu="성동구">
+          <td style="font-weight:600;color:var(--accent)">성수동 (현재 선택)</td>
+          <td>24,580명</td>
+          <td>34개</td>
+          <td style="color:var(--accent3)">~4,200만원</td>
+          <td><span style="color:#ff5050">8.2%</span></td>
+          <td><span class="badge badge-green">현재 분석 지역</span></td>
+        </tr>
+        <tr data-gu="성동구">
+          <td>왕십리</td>
+          <td>19,400명</td>
+          <td>21개</td>
+          <td style="color:var(--accent3)">~3,100만원</td>
+          <td><span style="color:var(--text2)">6.8%</span></td>
+          <td><span class="badge badge-blue">경쟁 낮음</span></td>
+        </tr>
+        <tr data-gu="마포구">
+          <td>망원동</td>
+          <td>18,230명</td>
+          <td>27개</td>
+          <td style="color:var(--accent3)">~3,100만원</td>
+          <td><span style="color:var(--text2)">7.1%</span></td>
+          <td><span class="badge badge-blue">유사 상권</span></td>
+        </tr>
+        <tr data-gu="마포구">
+          <td>연남동</td>
+          <td>21,400명</td>
+          <td>48개</td>
+          <td style="color:var(--accent3)">~3,500만원</td>
+          <td><span style="color:var(--accent3)">10.4%</span></td>
+          <td><span class="badge badge-orange">경쟁 높음</span></td>
+        </tr>
+        <tr data-gu="강남구">
+          <td>압구정</td>
+          <td>22,100명</td>
+          <td>56개</td>
+          <td style="color:var(--accent3)">~4,800만원</td>
+          <td><span style="color:var(--accent3)">9.7%</span></td>
+          <td><span class="badge badge-orange">임대료 높음</span></td>
+        </tr>
+        <tr data-gu="용산구">
+          <td>이태원</td>
+          <td>20,800명</td>
+          <td>39개</td>
+          <td style="color:var(--accent3)">~3,700만원</td>
+          <td><span style="color:#ff5050">11.3%</span></td>
+          <td><span class="badge badge-gray">폐업률 주의</span></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
@@ -932,12 +964,11 @@
   <div class="card">
     <div class="table-wrap">
       <table>
-        <tr><th>분석 제목</th><th>지역</th><th>업종</th><th>종합점수</th><th>날짜</th><th>상태</th><th>액션</th></tr>
+        <tr><th>분석 제목</th><th>지역</th><th>업종</th><th>날짜</th><th>상태</th><th>액션</th></tr>
         <tr>
           <td style="font-weight:500">성수동 카페 입지 분석</td>
           <td>서울 성동구 성수동</td>
           <td><span class="tag">카페/음료</span></td>
-          <td><span style="color:var(--accent);font-weight:700;font-family:monospace">94점</span></td>
           <td style="color:var(--text2);font-size:12px">2025.03.15</td>
           <td><span class="badge badge-green">완료</span></td>
           <td><button class="btn btn-outline btn-sm" onclick="goto('dashboard')">보기</button></td>
@@ -946,7 +977,6 @@
           <td style="font-weight:500">홍대 분식 경쟁 분석</td>
           <td>서울 마포구 서교동</td>
           <td><span class="tag">음식점</span></td>
-          <td><span style="color:var(--accent2);font-weight:700;font-family:monospace">78점</span></td>
           <td style="color:var(--text2);font-size:12px">2025.03.12</td>
           <td><span class="badge badge-blue">완료</span></td>
           <td><button class="btn btn-outline btn-sm">보기</button></td>
@@ -955,7 +985,6 @@
           <td style="font-weight:500">강남 편의점 매출 분석</td>
           <td>서울 강남구 역삼동</td>
           <td><span class="tag">편의점</span></td>
-          <td><span style="color:var(--accent2);font-weight:700;font-family:monospace">82점</span></td>
           <td style="color:var(--text2);font-size:12px">2025.03.08</td>
           <td><span class="badge badge-blue">완료</span></td>
           <td><button class="btn btn-outline btn-sm">보기</button></td>
@@ -964,7 +993,6 @@
           <td style="font-weight:500">마포 한식당 입지 진단</td>
           <td>서울 마포구 공덕동</td>
           <td><span class="tag">음식점</span></td>
-          <td><span style="color:var(--text2);font-family:monospace">—</span></td>
           <td style="color:var(--text2);font-size:12px">2025.03.18</td>
           <td><span class="badge badge-gray">진행 중</span></td>
           <td><button class="btn btn-outline btn-sm" onclick="goto('fusion')">이어서</button></td>
@@ -990,7 +1018,7 @@
           <div class="avatar founder-av" id="mypageAvatar" style="width:56px;height:56px;font-size:20px">김</div>
           <div>
             <div style="font-size:16px;font-weight:600" id="mypageName">김창업</div>
-            <div style="font-size:13px;color:var(--text2)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="235057425157565363464e424a4f0d404c4e">[email&#160;protected]</a></div>
+            <div style="font-size:13px;color:var(--text2)">startup@email.com</div>
             <div style="margin-top:4px"><span class="badge badge-blue" id="mypageRoleBadge">예비 창업자</span></div>
           </div>
         </div>
@@ -1015,18 +1043,10 @@
       <div class="card" style="margin-bottom:20px">
         <div class="section-title" style="margin-bottom:16px">📊 이용 현황</div>
         <div style="display:flex;flex-direction:column;gap:14px">
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(0,229,160,0.05);border-radius:8px">
-            <span style="font-size:13px">총 분석 횟수</span><span style="font-family:monospace;font-size:18px;font-weight:700;color:var(--accent)">12회</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(0,132,255,0.05);border-radius:8px">
-            <span style="font-size:13px">AI 질문 횟수</span><span style="font-family:monospace;font-size:18px;font-weight:700;color:var(--accent2)">28회</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(255,255,255,0.03);border-radius:8px">
-            <span style="font-size:13px">CSV 업로드</span><span style="font-family:monospace;font-size:18px;font-weight:700">5회</span>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(255,255,255,0.03);border-radius:8px">
-            <span style="font-size:13px">가입일</span><span style="font-size:13px;color:var(--text2)">2025.01.10</span>
-          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(0,229,160,0.05);border-radius:8px"><span style="font-size:13px">총 분석 횟수</span><span style="font-family:monospace;font-size:18px;font-weight:700;color:var(--accent)">12회</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(0,132,255,0.05);border-radius:8px"><span style="font-size:13px">AI 질문 횟수</span><span style="font-family:monospace;font-size:18px;font-weight:700;color:var(--accent2)">28회</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(255,255,255,0.03);border-radius:8px"><span style="font-size:13px">CSV 업로드</span><span style="font-family:monospace;font-size:18px;font-weight:700">5회</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:rgba(255,255,255,0.03);border-radius:8px"><span style="font-size:13px">가입일</span><span style="font-size:13px;color:var(--text2)">2025.01.10</span></div>
         </div>
       </div>
       <div class="card" style="margin-bottom:20px">
@@ -1060,16 +1080,10 @@
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ═══════════════════════════════════
-   STATE
-═══════════════════════════════════ */
-let currentUserType = 'founder'; // 'founder' | 'owner'
+<script>
+let currentUserType = 'founder';
 let selectedOnboardType = null;
 
-/* ═══════════════════════════════════
-   CONTENT DATA
-═══════════════════════════════════ */
 const CONTENT = {
   founder: {
     greeting: '안녕하세요, 김창업님 👋',
@@ -1086,21 +1100,21 @@ const CONTENT = {
       {label:'분석 완료',value:'12',change:'↑ 이번 달 3건',changeClass:'up',color:'green'},
       {label:'검토 상권',value:'47',change:'↑ 서울 중심',changeClass:'info',color:'blue'},
       {label:'AI 상담',value:'28',change:'↑ 총 대화수',changeClass:'up',color:'orange'},
-      {label:'최고 점수',value:'94',change:'↑ 성수동 카페',changeClass:'',color:'purple'},
+      {label:'최근 분석',value:'성수동',change:'2025.03.15',changeClass:'',color:'purple'},
     ],
     introHTML: `
       <p style="font-size:13px;color:var(--text2);line-height:1.8;margin-bottom:16px">
         <b style="color:var(--text)">상권AI</b>는 공공 데이터와 AI를 결합한 맞춤형 입지 분석 플랫폼입니다.<br>
-        예비 창업자에게는 <b style="color:var(--accent)">최적 입지 추천</b>을 제공합니다.
+        예비 창업자에게는 <b style="color:var(--accent)">최적 입지 데이터</b>를 제공합니다.
       </p>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(0,229,160,0.05);border-radius:8px;border:1px solid rgba(0,229,160,0.1);cursor:pointer" onclick="goto('public')">
           <span style="font-size:20px">📍</span>
-          <div><div style="font-size:13px;font-weight:600;margin-bottom:2px">유동인구 · 매출 · 업종 분포 시각화</div><div style="font-size:12px;color:var(--text2)">공공 상권 데이터를 지도 위에 직관적으로 표시</div></div>
+          <div><div style="font-size:13px;font-weight:600;margin-bottom:2px">추정 유동인구 · 경쟁 점포수 시각화</div><div style="font-size:12px;color:var(--text2)">공공 상권 데이터를 지도 위에 직관적으로 표시</div></div>
         </div>
         <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(0,132,255,0.05);border-radius:8px;border:1px solid rgba(0,132,255,0.1);cursor:pointer" onclick="goto('dashboard')">
-          <span style="font-size:20px">🎯</span>
-          <div><div style="font-size:13px;font-weight:600;margin-bottom:2px">AI 입지 점수 & 추천</div><div style="font-size:12px;color:var(--text2)">5개 지표 종합 분석 → 업종별 최적 입지 0~100점</div></div>
+          <span style="font-size:20px">🏪</span>
+          <div><div style="font-size:13px;font-weight:600;margin-bottom:2px">업종 분포 & 상권 비교</div><div style="font-size:12px;color:var(--text2)">서울 내 유사 상권 비교로 입지 판단 보조</div></div>
         </div>
         <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,107,53,0.05);border-radius:8px;border:1px solid rgba(255,107,53,0.1);cursor:pointer" onclick="goto('chat')">
           <span style="font-size:20px">🤖</span>
@@ -1108,37 +1122,39 @@ const CONTENT = {
         </div>
       </div>`,
     history: [
-      {dot:'var(--accent)',title:'성수동 카페 입지 분석',badge:'완료',badgeClass:'badge-green',time:'2025.03.15 · 종합점수 94점'},
-      {dot:'var(--accent2)',title:'홍대 분식 경쟁 분석',badge:'완료',badgeClass:'badge-blue',time:'2025.03.12 · 종합점수 78점'},
-      {dot:'var(--accent3)',title:'강남 편의점 매출 분석',badge:'완료',badgeClass:'badge-blue',time:'2025.03.08 · 종합점수 82점'},
+      {dot:'var(--accent)',title:'성수동 카페 입지 분석',badge:'완료',badgeClass:'badge-green',time:'2025.03.15 · 유동인구 24,580명'},
+      {dot:'var(--accent2)',title:'홍대 분식 경쟁 분석',badge:'완료',badgeClass:'badge-blue',time:'2025.03.12 · 경쟁 점포 38개'},
+      {dot:'var(--accent3)',title:'강남 편의점 분석',badge:'완료',badgeClass:'badge-blue',time:'2025.03.08 · 유동인구 31,200명'},
       {dot:'#9b59b6',title:'마포 한식당 입지',badge:'분석 중',badgeClass:'badge-gray',time:'2025.03.18 · 진행 중'},
     ],
     quick: [
-      {icon:'📍',bg:'rgba(0,229,160,0.1)',title:'신규 입지 분석',desc:'지역·업종 선택 → 공공데이터 기반 입지 점수와 추천 결과 즉시 확인',arrow:'시작하기 →',arrowColor:'var(--accent)',page:'fusion'},
-      {icon:'🗺️',bg:'rgba(0,132,255,0.1)',title:'지역 상권 탐색',desc:'지도 위에서 유동인구·매출·포화도를 레이어로 시각화하여 탐색',arrow:'탐색하기 →',arrowColor:'var(--accent2)',page:'public'},
+      {icon:'📍',bg:'rgba(0,229,160,0.1)',title:'신규 입지 분석',desc:'지역·업종 선택 → 공공데이터 기반 유동인구·경쟁 점포수 분석 결과 확인',arrow:'시작하기 →',arrowColor:'var(--accent)',page:'fusion'},
+      {icon:'🗺️',bg:'rgba(0,132,255,0.1)',title:'지역 상권 탐색',desc:'지도 위에서 유동인구·업종 분포·경쟁 밀집도를 레이어로 시각화',arrow:'탐색하기 →',arrowColor:'var(--accent2)',page:'public'},
       {icon:'🤖',bg:'rgba(167,139,250,0.1)',title:'AI 입지 상담',desc:'챗봇에게 자연어로 상권 질문 → 공공데이터 기반 즉각 전략 응답',arrow:'질문하기 →',arrowColor:'#9b59b6',page:'chat'},
     ],
+    // ✅ 수정: 종합 입지 점수·예상 월매출 제거 → 추정 유동인구·경쟁 점포수로 교체 (grid-3)
     dashStats: [
-      {label:'추정 유동인구',value:'24,580',change:'↑ 명/일 기준',changeClass:'up',color:'blue'},
-      {label:'경쟁 강도',value:'보통',change:'— 동일 업종 경쟁',changeClass:'',color:'orange'},
-      {label:'경쟁 점포수',value:'34',change:'반경 500m 기준',changeClass:'',color:'green'},
+      {label:'추정 유동인구 (일평균)',value:'24,580',change:'↑ 명/일',changeClass:'up',color:'blue'},
+      {label:'경쟁 점포수 (500m)',value:'34',change:'— 동종 업종',changeClass:'',color:'orange'},
+      {label:'폐업률 (최근 1년)',value:'8.2%',change:'↓ 서울 평균 9.1%',changeClass:'up',color:'green'},
     ],
     dashSub: '성수동 카페 입지 분석 · 2025.03.15',
-    dashEvalTitle: '🎯 세부 항목 평가',
+    dashEvalTitle: '🎯 세부 항목 분석',
+    // ✅ 수정: 임대료 적정성·상권 성장성·타겟 고객 밀도 제거
     dashEvals: [
       {label:'유동인구 접근성',score:'88/100',color:'var(--accent)',fill:88,fillColor:''},
-      {label:'경쟁 환경',score:'72/100',color:'var(--accent2)',fill:72,fillColor:'var(--accent2)'},
+      {label:'경쟁 환경 (점포 밀도)',score:'72/100',color:'var(--accent2)',fill:72,fillColor:'var(--accent2)'},
     ],
-    stratScore: '94',
-    stratTitle: '성수동 스페셜티 카페 — 강력 추천 ✅',
-    stratDesc: 'AI 분석 결과, 성수동은 현재 스페셜티 카페 수요 대비 공급이 부족하며 MZ세대 유동인구가 높아 진입 최적 타이밍입니다.',
+    stratScore: '—',
+    stratTitle: '성수동 스페셜티 카페 — 데이터 기반 제안',
+    stratDesc: 'AI 분석 결과, 성수동은 현재 스페셜티 카페 경쟁 점포 대비 유동인구 밀도가 높습니다. 아래 전략은 공공데이터 기반 제안이며 실제 수익을 보장하지 않습니다.',
     stratTags: ['🎯 MZ 타겟','☕ 스페셜티','📸 SNS 마케팅','🏢 성수 감성'],
-    stratSub: '데이터 분석 기반 맞춤 창업 전략',
+    stratSub: '공공데이터 기반 입지 분석 전략',
     stratInsights: [
       {icon:'📍',bg:'rgba(0,229,160,0.1)',title:'입지 전략',desc:'뚝섬역 3번 출구 도보 5분 이내 권역이 유동인구 집중 구간. 1층 코너 위치가 가시성 극대화에 유리합니다.'},
       {icon:'👥',bg:'rgba(0,132,255,0.1)',title:'타겟 고객층',desc:'주 고객은 25-35세 직장인 및 크리에이터. 오전 9-11시, 오후 2-4시 피크타임 집중 공략이 핵심입니다.'},
-      {icon:'⚠️',bg:'rgba(255,107,53,0.1)',title:'주요 리스크',desc:'임대료 상승세가 연 8% 이상. 장기계약 시 고정비 리스크 대비 필요. 경쟁업체 진입 모니터링 권장.'},
-      {icon:'💰',bg:'rgba(155,89,182,0.1)',title:'수익성 분석',desc:'손익분기점은 월 2,400만원. 현 상권 평균 매출 기준 약 8개월 내 BEP 도달 가능성 72% 예측.'},
+      {icon:'🏪',bg:'rgba(255,107,53,0.1)',title:'경쟁 현황',desc:'반경 500m 내 동종 34개 점포 운영 중. 스페셜티+공간 컨셉 차별화로 기존 경쟁 구도에서 벗어나는 전략이 필요합니다.'},
+      {icon:'⚠️',bg:'rgba(155,89,182,0.1)',title:'주요 리스크',desc:'임대료 상승세 및 신규 경쟁 점포 진입 가능성에 유의하세요. 이 분석은 공공데이터 기반이며 수익 보장 근거가 아닙니다.'},
     ],
     stratPlan: [
       {dot:'var(--accent)',title:'1단계: 입지 확정 (1-2주)',time:'후보 3곳 현장 방문 → 계약 협상'},
@@ -1147,8 +1163,8 @@ const CONTENT = {
       {dot:'#9b59b6',title:'4단계: 안정화 (3개월)',time:'고객 피드백 반영 · 메뉴 최적화'},
       {dot:'var(--accent)',title:'5단계: 성장 (6개월+)',time:'충성 고객 확보 · 확장 검토'},
     ],
-    chatWelcome: '안녕하세요! 저는 상권 분석 AI입니다. 성수동 카페 <b>창업 입지 분석</b> 데이터를 기반으로 질문에 답변해 드릴게요. 무엇이 궁금하신가요?',
-    chatQuickBtns: ['경쟁업체 현황이 궁금해요','예상 수익은 얼마인가요?','임대료 적정 수준은?','마케팅 전략 알려주세요'],
+    chatWelcome: '안녕하세요! 저는 상권 분석 AI입니다. 성수동 카페 <b>입지 분석</b> 데이터를 기반으로 질문에 답변해 드릴게요. 무엇이 궁금하신가요?',
+    chatQuickBtns: ['경쟁업체 현황이 궁금해요','유동인구가 많은 시간대는?','임대료 적정 수준은?','마케팅 전략 알려주세요'],
     chatUserName: '김창업',
   },
   owner: {
@@ -1237,43 +1253,31 @@ const CONTENT = {
   }
 };
 
-/* ═══════════════════════════════════
-   ONBOARDING
-═══════════════════════════════════ */
+/* ── ONBOARDING ── */
 function selectOnboardType(type) {
   selectedOnboardType = type;
   document.getElementById('obFounder').className = 'ob-card founder-card' + (type==='founder'?' selected-founder':'');
   document.getElementById('obOwner').className = 'ob-card owner-card' + (type==='owner'?' selected-owner':'');
   const btn = document.getElementById('obConfirm');
-  btn.classList.add('ready');
   btn.className = 'ob-confirm ready ' + (type==='founder'?'founder-ready':'owner-ready');
 }
-
-function confirmOnboardType() {
-  if (!selectedOnboardType) return;
-  startWithType(selectedOnboardType);
-}
-
+function confirmOnboardType() { if (selectedOnboardType) startWithType(selectedOnboardType); }
 function startWithType(type) {
   currentUserType = type;
   document.getElementById('onboardOverlay').style.display = 'none';
-  // login 화면은 onboarding 후에 보여줌
   document.getElementById('loginPage').style.display = 'flex';
   const msg = type==='founder' ? '예비 창업자로 선택되었습니다' : '소상공인으로 선택되었습니다';
   const sub = type==='founder' ? '로그인 후 입지 분석을 시작하세요' : '로그인 후 매장 진단을 시작하세요';
   setTimeout(() => showToast(msg, sub), 400);
 }
 
-/* ═══════════════════════════════════
-   LOGIN
-═══════════════════════════════════ */
+/* ── LOGIN ── */
 function switchLoginTab(tab) {
   document.getElementById('tabLogin').classList.toggle('active', tab==='login');
   document.getElementById('tabRegister').classList.toggle('active', tab==='register');
   document.getElementById('loginForm').style.display = tab==='login'?'block':'none';
   document.getElementById('registerForm').style.display = tab==='register'?'block':'none';
 }
-
 function enterApp() {
   document.getElementById('loginPage').style.display = 'none';
   document.getElementById('appShell').style.display = 'flex';
@@ -1283,30 +1287,23 @@ function enterApp() {
   showToast(`${d.name}님, 환영합니다!`, `${d.pillText}로 시작합니다`);
 }
 
-/* ═══════════════════════════════════
-   USER TYPE SWITCH
-═══════════════════════════════════ */
+/* ── USER TYPE SWITCH ── */
 function switchUserType(type) {
   if (type === currentUserType) return;
   currentUserType = type;
   renderAll();
-  // 현재 페이지 유지 (home 으로 강제 이동은 안 함)
-  const d = CONTENT[type];
   showToast(
     type==='founder' ? '창업자 모드로 전환됐습니다' : '소상공인 모드로 전환됐습니다',
-    type==='founder' ? '입지 추천 및 상권 분석 기능이 업데이트됩니다' : 'CSV 업로드 및 매장 진단 기능이 업데이트됩니다'
+    type==='founder' ? '입지 분석 기능이 업데이트됩니다' : 'CSV 업로드 및 매장 진단 기능이 업데이트됩니다'
   );
   goto('home');
 }
 
-/* ═══════════════════════════════════
-   RENDER ALL
-═══════════════════════════════════ */
+/* ── RENDER ALL ── */
 function renderAll() {
   const d = CONTENT[currentUserType];
   const isFounder = currentUserType === 'founder';
 
-  /* ── Sidebar ── */
   document.getElementById('ttFounder').className = 'tt-btn' + (isFounder?' on-founder':'');
   document.getElementById('ttOwner').className = 'tt-btn' + (!isFounder?' on-owner':'');
 
@@ -1315,11 +1312,8 @@ function renderAll() {
   document.getElementById('sidebarName').textContent = d.name;
   document.getElementById('sidebarRole').textContent = d.role;
   document.getElementById('sidebarRole').style.color = d.roleColor;
-
-  // CSV 배지 (소상공인만 표시)
   document.getElementById('nav-upload-badge').style.display = isFounder?'none':'inline-block';
 
-  /* ── Home greeting ── */
   document.getElementById('homeGreeting').textContent = d.greeting;
   document.getElementById('homeSub').textContent = d.sub;
   const pill = document.getElementById('homeTypePill');
@@ -1331,7 +1325,6 @@ function renderAll() {
   pbtn.className = 'btn btn-sm ' + d.primaryBtnClass;
   pbtn.onclick = () => goto(d.primaryBtnTarget);
 
-  /* ── Stat cards ── */
   document.getElementById('homeStatsGrid').innerHTML = d.stats.map(s => `
     <div class="stat-card ${s.color}">
       <div class="stat-label">${s.label}</div>
@@ -1339,11 +1332,9 @@ function renderAll() {
       <div class="stat-change ${s.changeClass}">${s.change}</div>
     </div>`).join('');
 
-  /* ── Intro card ── */
   document.getElementById('homeIntroCard').innerHTML =
     `<div class="section-header"><div class="section-title">🚀 서비스 소개</div></div>` + d.introHTML;
 
-  /* ── History ── */
   document.getElementById('homeHistoryList').innerHTML = d.history.map(h => `
     <div class="tl-item">
       <div class="tl-dot" style="background:${h.dot}"></div>
@@ -1353,7 +1344,6 @@ function renderAll() {
       </div>
     </div>`).join('');
 
-  /* ── Quick grid ── */
   document.getElementById('homeQuickGrid').innerHTML = d.quick.map(q => `
     <div style="padding:20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s" onclick="goto('${q.page}')"
          onmouseover="this.style.borderColor='${q.arrowColor}';this.style.background='rgba(255,255,255,0.04)'"
@@ -1364,12 +1354,15 @@ function renderAll() {
       <div style="font-size:12px;font-weight:600;color:${q.arrowColor}">${q.arrow}</div>
     </div>`).join('');
 
-  /* ── Dashboard ── */
   document.getElementById('dashSub').textContent = d.dashSub;
-  document.getElementById('dashStatsGrid').innerHTML = d.dashStats.map(s => `
+
+  // ✅ 창업자: grid-3 / 소상공인: grid-4
+  const dashGrid = document.getElementById('dashStatsGrid');
+  dashGrid.className = 'card-grid ' + (isFounder ? 'grid-3' : 'grid-4');
+  dashGrid.innerHTML = d.dashStats.map(s => `
     <div class="stat-card ${s.color}">
       <div class="stat-label">${s.label}</div>
-      <div class="stat-value" style="${s.value.length > 5 ? 'font-size:20px' : ''}">${s.value}</div>
+      <div class="stat-value" style="${s.value.length>6?'font-size:20px':''}">${s.value}</div>
       <div class="stat-change ${s.changeClass}">${s.change}</div>
     </div>`).join('');
 
@@ -1385,7 +1378,6 @@ function renderAll() {
       </div>
     </div>`).join('');
 
-  /* ── Strategy ── */
   document.getElementById('stratSub').textContent = d.stratSub;
   document.getElementById('stratScore').textContent = d.stratScore;
   document.getElementById('stratTitle').textContent = d.stratTitle;
@@ -1408,12 +1400,10 @@ function renderAll() {
       </div>
     </div>`).join('');
 
-  /* ── Chat welcome ── */
   document.getElementById('chatWelcomeMsg').querySelector('.chat-bubble').innerHTML = d.chatWelcome;
   document.getElementById('chatQuickBtns').innerHTML = d.chatQuickBtns.map(t =>
     `<button class="btn btn-outline btn-sm" onclick="quickChat('${t}')">${t}</button>`).join('');
 
-  /* ── Mypage ── */
   document.getElementById('mypageAvatar').className = 'avatar ' + (isFounder?'founder-av':'owner-av');
   document.getElementById('mypageName').textContent = d.name;
   document.getElementById('mypageNameInput').value = d.name;
@@ -1421,27 +1411,15 @@ function renderAll() {
 
   const mf = document.getElementById('mypageTypeFounder');
   const mo = document.getElementById('mypageTypeOwner');
-  if (isFounder) {
-    mf.className = 'btn btn-sm btn-primary-founder';
-    mo.className = 'btn btn-sm btn-outline';
-  } else {
-    mf.className = 'btn btn-sm btn-outline';
-    mo.className = 'btn btn-sm btn-primary-owner';
-  }
+  if (isFounder) { mf.className='btn btn-sm btn-primary-founder'; mo.className='btn btn-sm btn-outline'; }
+  else { mf.className='btn btn-sm btn-outline'; mo.className='btn btn-sm btn-primary-owner'; }
 
-  /* ── Upload owner tip ── */
   document.getElementById('uploadOwnerTip').style.display = isFounder?'none':'block';
-
-  /* ── body class for accent overrides ── */
   document.body.classList.toggle('owner-mode', !isFounder);
-
-  /* ── Nav active reset ── */
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-founder','active-owner'));
 }
 
-/* ═══════════════════════════════════
-   NAVIGATION
-═══════════════════════════════════ */
+/* ── NAVIGATION ── */
 function goto(page) {
   if (page === 'login') {
     document.getElementById('loginPage').style.display = 'flex';
@@ -1450,38 +1428,35 @@ function goto(page) {
   }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active-founder','active-owner'));
-
   const target = document.getElementById('page-' + page);
   if (target) target.classList.add('active');
-
-  const navMap = {
-    home:'nav-home', upload:'nav-upload', public:'nav-public',
-    fusion:'nav-fusion', dashboard:'nav-dashboard', strategy:'nav-strategy',
-    chat:'nav-chat', history:'nav-history', mypage:'nav-mypage'
-  };
+  const navMap = {home:'nav-home',upload:'nav-upload',public:'nav-public',fusion:'nav-fusion',dashboard:'nav-dashboard',strategy:'nav-strategy',chat:'nav-chat',history:'nav-history',mypage:'nav-mypage'};
   const navEl = document.getElementById(navMap[page]);
   if (navEl) navEl.classList.add(currentUserType==='founder'?'active-founder':'active-owner');
 }
 
-/* ═══════════════════════════════════
-   UPLOAD
-═══════════════════════════════════ */
+/* ── REGION FILTER (유사 상권) ── */
+function filterRegion(btn, gu) {
+  document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#similarTable tr[data-gu]').forEach(row => {
+    row.style.display = (gu === '전체' || row.dataset.gu === gu) ? '' : 'none';
+  });
+}
+
+/* ── UPLOAD ── */
 function simulateUpload() {
   document.getElementById('uploadStatus').style.display = 'block';
   showToast('업로드 완료', 'sales_data_2025.csv · 12,847행 로드됨');
 }
 
-/* ═══════════════════════════════════
-   FUSION
-═══════════════════════════════════ */
+/* ── FUSION ── */
 function runAnalysis() {
   document.getElementById('analysisProgress').style.display = 'block';
   showToast('분석 시작됨', 'AI 모델이 데이터를 처리 중입니다...');
 }
 
-/* ═══════════════════════════════════
-   CHAT
-═══════════════════════════════════ */
+/* ── CHAT ── */
 function sendChat() {
   const input = document.getElementById('chatInput');
   const msg = input.value.trim();
@@ -1491,27 +1466,31 @@ function sendChat() {
   container.innerHTML += `<div class="chat-msg user"><div class="chat-sender">${d.chatUserName}</div><div class="chat-bubble">${msg}</div></div>`;
   input.value = '';
   container.scrollTop = container.scrollHeight;
-
   const ownerMode = currentUserType === 'owner';
   setTimeout(() => {
     const reply = ownerMode
       ? `매장 데이터를 분석 중입니다... <b>${msg}</b>에 대한 답변입니다.<br><br>취약점 진단 데이터를 기반으로 구체적인 개선 방안을 제시해드릴게요. 현재 분석된 5개 진단 결과와 상권 평균 데이터를 종합하여 실행 가능한 전략을 도출합니다. 대시보드에서 상세 지표를 확인해 보세요! 📈`
-      : `데이터를 분석 중입니다... 성수동 상권 데이터 기준으로 답변드릴게요. <b>${msg}</b>와 관련해 현재 분석된 12개 데이터셋과 공공 상권 정보를 종합하여 최적의 전략을 도출하고 있습니다. 잠시 후 상세 분석 결과를 확인하시거나 대시보드를 참고해 주세요! 📊`;
+      : `데이터를 분석 중입니다... 성수동 상권 데이터 기준으로 답변드릴게요. <b>${msg}</b>와 관련해 현재 분석된 공공 상권 정보와 유동인구·경쟁 점포 데이터를 종합하여 전략을 도출하고 있습니다. 잠시 후 상세 분석 결과를 확인하시거나 대시보드를 참고해 주세요! 📊`;
     container.innerHTML += `<div class="chat-msg ai ${ownerMode?'owner-mode':''}"><div class="chat-sender">🤖 상권AI</div><div class="chat-bubble">${reply}</div></div>`;
     container.scrollTop = container.scrollHeight;
   }, 700);
 }
-
 function quickChat(text) {
   document.getElementById('chatInput').value = text;
   sendChat();
 }
 
-/* ═══════════════════════════════════
-   TOAST
-═══════════════════════════════════ */
+/* ── TOAST ── */
 let toastTimer = null;
 function showToast(title, desc, icon) {
   document.getElementById('toastTitle').textContent = title;
   document.getElementById('toastDesc').textContent = desc;
-  document.getElementById('toastIcon').textContent =
+  document.getElementById('toastIcon').textContent = icon || '✦';
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
